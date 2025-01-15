@@ -8,7 +8,7 @@ public class LoggingController {
             logger.log("INFO", "Starting program.");
 
             try {
-                loggingTask(logger);
+                loggingTask();
             } catch (Exception e) {
                 logger.log("ERROR", "ERROR occurs: " + e.getMessage());
             }
@@ -16,14 +16,15 @@ public class LoggingController {
             logger.log("INFO", "Program finishes work.");
         }
     }
-    private void loggingTask(AppLogger logger) throws Exception {
-        logger.log("DEBUG", "Start logging...");
+    private void loggingTask() throws Exception {
+        AppLogger taskLogger = AppLogger.getInstance();
+        taskLogger.log("DEBUG", "Start logging...");
 
         for (int i = 1; i < 5; i++) {
-            logger.log("LOG", "Step " + i);
+            taskLogger.log("LOG", "Step " + i);
             Thread.sleep(200);
         }
 
-        logger.log("DEBUG", "Logging finished.");
+        taskLogger.log("DEBUG", "Logging finished.");
     }
 }
