@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class AppLogger implements AutoCloseable {
     private static AppLogger instance;
-    private static final String LOG_FILE_PATH = "src/main/resources/app.log";
+    private final static String LOG_FILE_PATH = "src/main/resources/app.log";
     private final PrintWriter fileWriter;
 
     private AppLogger() {
@@ -37,5 +37,10 @@ public class AppLogger implements AutoCloseable {
     @Override
     public void close() {
         fileWriter.close();
+    }
+    public static synchronized void closeInstance() {
+        //for tests
+        instance.close();
+        instance = null;
     }
 }
